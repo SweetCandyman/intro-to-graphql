@@ -20,7 +20,6 @@ const remove = collection =>
   })
 
 beforeEach(async done => {
-  const db = cuid()
   function clearDB() {
     return Promise.all(_.map(mongoose.connection.collections, c => remove(c)))
   }
@@ -28,8 +27,12 @@ beforeEach(async done => {
   if (mongoose.connection.readyState === 0) {
     try {
       await mongoose.connect(
-        config.dbUrl + db,
+        config.dbUrl,
         {
+          auth: {
+            user: process.env.MONGODB_USER,
+            password: process.env.MONGODB_PASSWORD
+          },
           useNewUrlParser: true,
           autoIndex: true
         }
