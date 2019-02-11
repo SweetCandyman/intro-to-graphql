@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import cuid from 'cuid'
 import config from './src/config'
 import _ from 'lodash'
 import { User } from './src/types/user/user.model'
@@ -27,7 +26,7 @@ beforeEach(async done => {
   if (mongoose.connection.readyState === 0) {
     try {
       await mongoose.connect(
-        config.dbUrl,
+         config.dbUrl,
         {
           auth: {
             user: process.env.MONGODB_USER,

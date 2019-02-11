@@ -139,9 +139,10 @@ describe('Product schema', () => {
             price
             image
             type
-            range
+            description
             liquidCooled
             bikeType
+            range
           }
         }
       `
