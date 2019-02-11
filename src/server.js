@@ -10,7 +10,29 @@ import user from './types/user/user.resolvers'
 const types = ['product', 'coupon', 'user']
 
 export const start = async () => {
+  // Adding a return type of myCat to Cat
+  // query type wiil be Query with a capital Q
   const rootSchema = `
+    type Cat {
+      name: String        
+      breed: String
+      bestFriend: Cat
+    }
+
+    input CatInput {
+      name: String,
+      age: Int!
+      bestFriend: Cat!
+    }
+
+    type Query {
+      myCat: Cat
+    }
+
+    type Mutation {
+      newCat(input: CatInput!): Cat!
+    }
+
     schema {
       query: Query
     }
@@ -19,7 +41,21 @@ export const start = async () => {
 
   const server = new ApolloServer({
     typeDefs: [rootSchema],
-    resolvers: {},
+    // We resolve to the already defined Query linked to myCat in the rootSchema that returns a shape of Cat
+    resolvers: {
+      Query: {
+        myCat() {
+          return {
+            name: 'Garfield',
+            breed: 'Siamese',
+            bestFriend: {
+              name: 'Micaela',
+              breed: 'domestic'
+            }
+          }
+        }
+      }
+    },
     context({ req }) {
       // use the authenticate function from utils to auth req, its Async!
       return { user: null }
