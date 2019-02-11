@@ -6,10 +6,10 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "test": "cross-env NODE_ENV=testing jest --forceExit --detectOpenHandles --silent",
-    "test-schema": "GQL_LESSON=lesson-2 npm test -- -t lesson-2",
-    "test-resolvers": "npm test -- -t lesson-3",
+    "test-schema": "cross-env GQL_LESSON=lesson-2 npm test -- -t lesson-2",
+    "test-resolvers": "cross-env npm test -- -t lesson-3",
     "test-interfaces": "cross-env npm test -- -t lesson-4",
-    "test-auth": "npm test -- -t lesson-5",
+    "test-auth": "cross-env npm test -- -t lesson-5",
     "dev": "nodemon --exec yarn restart",
     "restart": "rimraf dist && yarn build && yarn start",
     "start": "node dist/index.js"
