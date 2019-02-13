@@ -55,3 +55,4 @@ extend type Mutation {
   updateProduct(id: ID!, input: UpdateProductInput!): Product!
   removeProduct(id: ID!): Product!
 }
+
